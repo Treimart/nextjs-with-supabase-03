@@ -3,6 +3,10 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import "./globals.css"
 import Link from "next/link"
+import Button from "@mui/material/Button"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
 import DeployButton from "@/components/DeployButton"
 
 export const metadata = {
@@ -23,15 +27,37 @@ export default async function RootLayout({
 
   return (
     <body>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            {user ? (
+              <div className="flex items-center gap-4">{user.email}</div>
+            ) : (
+              <Button
+                color="inherit"
+                href="/login"
+              >
+                Login
+              </Button>
+            )}
+          </Typography>
+          <Button color="inherit">Home</Button>
+          <Button color="inherit">Tools</Button>
+          <Button color="inherit">About</Button>
+        </Toolbar>
+      </AppBar>
       <main>
         <nav>
           {user ? (
             <div className="flex items-center gap-4">
-              Hey, {user.email}!
               <LogoutButton />
             </div>
           ) : (
-            <Link href="/login">Login</Link>
+            <p>Please log in with your account!</p>
           )}
         </nav>
         {children}
