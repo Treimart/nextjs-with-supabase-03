@@ -12,6 +12,9 @@ export async function POST(request: Request) {
   const title = String(formData.get("title"))
   const supabase = createRouteHandlerClient({ cookies })
 
+  //const user = supabase.auth.getUser()
+  //console.log(user)
+
   const { error } = await supabase.from("todos").insert([
     {
       id: uuidv4(),

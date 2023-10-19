@@ -35,7 +35,7 @@ export default async function RootLayout({
             sx={{ flexGrow: 1 }}
           >
             {user ? (
-              <div className="flex items-center gap-4">{user.email}</div>
+              <div>{user.email}</div>
             ) : (
               <Button
                 color="inherit"
@@ -45,9 +45,18 @@ export default async function RootLayout({
               </Button>
             )}
           </Typography>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">Tools</Button>
-          <Button color="inherit">About</Button>
+          <Button
+            color="inherit"
+            href="/"
+          >
+            Home
+          </Button>
+          <Button
+            color="inherit"
+            href="/todo"
+          >
+            Todo
+          </Button>
         </Toolbar>
       </AppBar>
       <main>
