@@ -46,5 +46,18 @@ export default async function Index() {
     data: { user }
   } = await supabase.auth.getUser()
 
-  return <h1>Hi!</h1>
+  const res = await fetch("https://www.boredapi.com/api/activity")
+  const data = await res.json()
+  const activity = data.activity
+  const type = data.type
+
+  return (
+    <div>
+      <h1>Hello!</h1>
+      <pre>
+        Feel bored? Consider the following {JSON.stringify(type)} activity:
+      </pre>
+      <pre>{JSON.stringify(activity)}</pre>
+    </div>
+  )
 }
