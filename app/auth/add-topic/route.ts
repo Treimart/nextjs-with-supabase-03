@@ -1,8 +1,6 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
-const { v4: uuidv4 } = require("uuid")
-uuidv4() // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 export const dynamic = "force-dynamic"
 
@@ -10,28 +8,23 @@ export async function POST(request: Request) {
   const requestUrl = new URL(request.url)
   const formData = await request.formData()
   const title = String(formData.get("title"))
+  const description = String(formData.get("description"))
   const supabase = createRouteHandlerClient({ cookies })
 
-  //const { data } = await supabase.from("users").select("id")
-  //console.log("id:" + data)
-
-  //const user = supabase.auth.getUser()
-  //console.log(user)
-
-  const { error } = await supabase.from("todos").insert([
+  const { error } = await supabase.from("topics").insert([
     {
-      id: uuidv4(),
+      user_id: null,
       created_at: new Date().toISOString(),
       title: title,
-      is_complete: false,
-      user_id: "3d0e2338-9df8-418e-be48-6b81230a86a9"
+      description: description,
+      is_relevant: true
     }
   ])
 
   if (error) {
     console.log("Error inserting data: ", error)
     return NextResponse.redirect(
-      `${requestUrl.origin}/todo?error=Could not add todo`,
+      `${requestUrl.origin}/topic?error=Could_not_add_topic`,
       {
         status: 301
       }
@@ -39,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${requestUrl.origin}/todo?message=Todo has been added`,
+    `${requestUrl.origin}/topic?message=topic_has_been_added`,
     {
       status: 301
     }

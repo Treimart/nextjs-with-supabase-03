@@ -1,10 +1,5 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
-import Link from "next/link"
-import LogoutButton from "../components/LogoutButton"
-import SupabaseLogo from "../components/SupabaseLogo"
-import NextJsLogo from "../components/NextJsLogo"
-import DeployButton from "../components/DeployButton"
 
 export const dynamic = "force-dynamic"
 
@@ -54,10 +49,10 @@ export default async function Index() {
   return (
     <div>
       <h1>Hello!</h1>
-      <pre>
-        Feel bored? Consider the following {JSON.stringify(type)} activity:
-      </pre>
-      <pre>{JSON.stringify(activity)}</pre>
+      <p>
+        Feel bored? Consider the following <u>{type}</u> activity:
+      </p>
+      <pre>{activity}</pre>
     </div>
   )
 }
