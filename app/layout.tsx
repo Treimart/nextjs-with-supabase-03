@@ -35,7 +35,10 @@ export default async function RootLayout({
             sx={{ flexGrow: 1 }}
           >
             {user ? (
-              <div>{user.email}</div>
+              <div>
+                {user.email}
+                <LogoutButton />
+              </div>
             ) : (
               <Button
                 color="inherit"
@@ -59,18 +62,7 @@ export default async function RootLayout({
           </Button>
         </Toolbar>
       </AppBar>
-      <main>
-        <nav>
-          {user ? (
-            <div className="flex items-center gap-4">
-              <LogoutButton />
-            </div>
-          ) : (
-            <p>Please log in with your account!</p>
-          )}
-        </nav>
-        {children}
-      </main>
+      <main>{children}</main>
     </body>
   )
 }
