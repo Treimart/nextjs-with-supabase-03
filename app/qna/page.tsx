@@ -1,20 +1,20 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
-import { Box, Button, TextField, TextareaAutosize } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 
 export const dynamic = "force-dynamic"
 
 export default async function ServerComponent() {
   const supabase = createServerComponentClient({ cookies })
 
-  const { data: topics } = await supabase.from("topics").select()
+  const { data: qnas } = await supabase.from("qnas").select()
 
   return (
     <div>
-      <pre>{JSON.stringify(topics, null, 2)}</pre>
+      <pre>{JSON.stringify(qnas, null, 2)}</pre>
 
       <form
-        action="/auth/add-topic"
+        action="/auth/add-qna"
         method="post"
       >
         <Box
@@ -28,22 +28,11 @@ export default async function ServerComponent() {
         >
           <TextField
             required
-            name="title"
-            id="title"
-            label="Title"
+            name="question"
+            id="question"
+            label="Question"
             variant="outlined"
-            placeholder="Coffee prices start increasing later this month"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <TextField
-            required
-            name="description"
-            id="description"
-            label="Description"
-            variant="outlined"
-            placeholder="Coffee prices will increase to $3 minimum in 29-th of October."
+            placeholder="How many legs does an octopus have?"
             InputLabelProps={{
               shrink: true
             }}
@@ -52,7 +41,7 @@ export default async function ServerComponent() {
             type="submit"
             variant="contained"
           >
-            Add topic
+            Add qna
           </Button>
         </Box>
       </form>

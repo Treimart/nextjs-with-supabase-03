@@ -1,30 +1,32 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
+const { v4: uuidv4 } = require("uuid")
+uuidv4() // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 export const dynamic = "force-dynamic"
 
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url)
   const formData = await request.formData()
-  const title = String(formData.get("title"))
-  const description = String(formData.get("description"))
+  const question = String(formData.get("question"))
   const supabase = createRouteHandlerClient({ cookies })
 
-  const { error } = await supabase.from("topics").insert([
+  const { error } = await supabase.from("qnas").insert([
     {
-      user_id: null,
+      id: uuidv4(),
       created_at: new Date().toISOString(),
-      title: title,
-      description: description,
-      is_relevant: true
+      question: question,
+      anwser: null,
+      is_pending: true,
+      user_id: "3d0e2338-9df8-418e-be48-6b81230a86a9"
     }
   ])
 
   if (error) {
     console.log("Error inserting data: ", error)
     return NextResponse.redirect(
-      `${requestUrl.origin}/topic?error=Could_not_add_topic`,
+      `${requestUrl.origin}/qna?error=Could_not_add_qna`,
       {
         status: 301
       }
@@ -32,7 +34,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${requestUrl.origin}/topic?message=topic_has_been_added`,
+    `${requestUrl.origin}/qna?message=Qna_has_been_added`,
     {
       status: 301
     }

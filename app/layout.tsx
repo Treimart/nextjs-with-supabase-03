@@ -60,6 +60,12 @@ export default async function RootLayout({
           >
             Todo
           </Button>
+          <Button
+            color="inherit"
+            href="/qna"
+          >
+            QnA
+          </Button>
         </Toolbar>
       </AppBar>
       <main>{children}</main>
