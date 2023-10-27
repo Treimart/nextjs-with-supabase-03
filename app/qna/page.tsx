@@ -45,6 +45,18 @@ export default async function ServerComponent() {
           </Button>
         </Box>
       </form>
+      <Button
+        variant="contained"
+        href="/qna/update"
+      >
+        Anwser
+      </Button>
+      <Button
+        variant="outlined"
+        href="/qna/delete"
+      >
+        Delete
+      </Button>
     </div>
   )
 }
