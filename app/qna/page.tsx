@@ -49,7 +49,7 @@ export default async function ServerComponent() {
         variant="contained"
         href="/qna/update"
       >
-        Anwser
+        Answer
       </Button>
       <Button
         variant="outlined"

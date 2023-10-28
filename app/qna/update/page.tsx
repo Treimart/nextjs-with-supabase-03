@@ -39,9 +39,9 @@ export default async function ServerComponent() {
           />
           <TextField
             required
-            name="anwser"
-            id="anwser"
-            label="Anwser"
+            name="answer"
+            id="answer"
+            label="Answer"
             variant="outlined"
             placeholder="An octopus has eigth legs."
             InputLabelProps={{

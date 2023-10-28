@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       id: uuidv4(),
       created_at: new Date().toISOString(),
       question: question,
-      anwser: null,
+      answer: null,
       is_pending: true,
       user_id: "3d0e2338-9df8-418e-be48-6b81230a86a9"
     }

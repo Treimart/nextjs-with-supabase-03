@@ -10,14 +10,14 @@ export async function POST(request: Request) {
   const requestUrl = new URL(request.url)
   const formData = await request.formData()
   const id = String(formData.get("id"))
-  const anwser = String(formData.get("anwser"))
+  const answer = String(formData.get("answer"))
   const supabase = createRouteHandlerClient({ cookies })
 
   const { data, error } = await supabase
     .from("qnas")
     .update([
       {
-        anwser: anwser
+        answer: answer
       }
     ])
     .match({ id: id })
